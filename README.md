@@ -22,7 +22,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 <h2 align="center">Case Study Questions</h2>
 
-### What is the total amount each customer spent at the restaurant?
+### 1. What is the total amount each customer spent at the restaurant?
 
 **SQL Query:**
 
@@ -35,7 +35,7 @@ FROM
 GROUP BY
 	s.customer_id
 ```
-#### Result Set:
+#### Result Set
 
 | Customers | Amount Spent |
 |-----------|--------------|
@@ -45,7 +45,7 @@ GROUP BY
 
 #### Summary: 
 
-### How many days has each customer visited the restaurant?
+### 2. How many days has each customer visited the restaurant?
 
 **SQL Query:**
 
@@ -58,7 +58,8 @@ FROM
 GROUP BY
 	customer_id
 ```
-#### Result Set:
+#### Result Set
+
 | Customers | Days Visited |
 |-----------|--------------|
 | A         | 6            |
@@ -67,7 +68,7 @@ GROUP BY
 
 #### Summary: 
 
-### What was the first item from the menu purchased by each customer?
+### 3. What was the first item from the menu purchased by each customer?
 
 **SQL Query:**
 
@@ -79,19 +80,33 @@ GROUP BY
 
 #### Summary: 
 
-### What is the most purchased item on the menu and how many times was it purchased by all customers?
+### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
 **SQL Query:**
 
 ```sql
-
+SELECT
+	product_name AS [productName],
+	COUNT(product_name) AS [numberOfPurchases]
+FROM
+	sales as s LEFT JOIN menu AS m ON s.product_id=m.product_id
+GROUP BY
+	product_name
+ORDER BY
+	numberOfPurchases DESC
 ```
-#### Result Set:
+#### Result Set
+
+| productName | numberOfPurchases |
+|-------------|---------------------|
+| ramen       | 8                   |
+| curry       | 4                   |
+| sushi       | 3                   |
 
 
 #### Summary: 
 
-###  Which item was the most popular for each customer?
+###  5. Which item was the most popular for each customer?
 
 **SQL Query:**
 
