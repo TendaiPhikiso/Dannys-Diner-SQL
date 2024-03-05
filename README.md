@@ -28,10 +28,18 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ```sql
 SELECT
-	DISTINCT customer_id AS [Customers],
-	SUM(m.price) AS [Amount Spent]
+	customer_id AS [Customers],
+	FORMAT(SUM(m.price),'$#,0.00') AS [Amount Spent] --formatting the price column to represent numeric values as a currency, including a $ sign.
 FROM
 	dbo.sales AS s LEFT JOIN menu as m ON s.product_id=m.product_id
 GROUP BY
 	s.customer_id
 ```
+#### Result Set:
+
+| Customers | Amount Spent |
+|-----------|--------------|
+| A         | $76.00       |
+| B         | $74.00       |
+| C         | $36.00       |
+
