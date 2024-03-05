@@ -111,9 +111,30 @@ ORDER BY
 **SQL Query:**
 
 ```sql
+SELECT
+	customer_id,
+	product_name AS [productName],
+	COUNT(product_name) AS [numberOfPurchases]
+FROM
+	sales as s LEFT JOIN menu AS m ON s.product_id=m.product_id
+GROUP BY
+	product_name,
+	customer_id
+ORDER BY
+	customer_id,
+	numberOfPurchases DESC
 
 ```
 #### Result Set:
+| Customers | productName | numberOfPurchases |
+|-----------|-------------|-------------------|
+| A         | ramen       | 3                 |
+| A         | curry       | 2                 |
+| A         | sushi       | 1                 |
+| B         | sushi       | 2                 |
+| B         | curry       | 2                 |
+| B         | ramen       | 2                 |
+| C         | ramen       | 3                 |
 
 
 #### Summary: 
