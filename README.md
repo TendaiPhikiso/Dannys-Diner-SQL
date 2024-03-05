@@ -20,4 +20,4 @@ Danny wants to use the data to answer a few simple questions about his customers
 <img width=500 src="https://github.com/TendaiPhikiso/Dannys-Diner-SQL/blob/main/images/ERD-Diagram.png">
 </p>
 
-
+<h2 align="center">Case Study Questions</h2>
