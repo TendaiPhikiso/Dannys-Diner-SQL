@@ -1,7 +1,7 @@
-<h1 align="center">Dannys-Diner-SQL</h1>
+<h1 align="center">Dannys Diner | SQL</h1>
 
 <p align="center">
-<img width=500 src="">
+<img  src="https://github.com/TendaiPhikiso/Dannys-Diner-SQL/blob/main/images/img.png">
 </p>
 
 <h2 align="center">Introduction</h2>
@@ -16,6 +16,8 @@ Danny wants to use the data to answer a few simple questions about his customers
 </P>
 
 <h2 align="center">Entity Relationship Diagram</h2>
-
+<p align="center">
+<img width=500 src="https://github.com/TendaiPhikiso/Dannys-Diner-SQL/blob/main/images/ERD-Diagram.png">
+</p>
 
 
