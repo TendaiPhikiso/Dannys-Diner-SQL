@@ -21,3 +21,17 @@ Danny wants to use the data to answer a few simple questions about his customers
 </p>
 
 <h2 align="center">Case Study Questions</h2>
+
+### 1. What is the total amount each customer spent at the restaurant?
+
+**SQL Query:**
+
+```sql
+SELECT
+	DISTINCT customer_id AS [Customers],
+	SUM(m.price) AS [Amount Spent]
+FROM
+	dbo.sales AS s LEFT JOIN menu as m ON s.product_id=m.product_id
+GROUP BY
+	s.customer_id
+```
