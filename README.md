@@ -22,7 +22,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 <h2 align="center">Case Study Questions</h2>
 
-### 1. What is the total amount each customer spent at the restaurant?
+### What is the total amount each customer spent at the restaurant?
 
 **SQL Query:**
 
@@ -42,4 +42,65 @@ GROUP BY
 | A         | $76.00       |
 | B         | $74.00       |
 | C         | $36.00       |
+
+#### Summary: 
+
+### How many days has each customer visited the restaurant?
+
+**SQL Query:**
+
+```sql
+SELECT
+	customer_id AS [Customers],
+	COUNT(order_date) AS [Days Visited]
+FROM
+	sales
+GROUP BY
+	customer_id
+```
+#### Result Set:
+| Customers | Days Visited |
+|-----------|--------------|
+| A         | 6            |
+| B         | 6            |
+| C         | 3            |
+
+#### Summary: 
+
+### What was the first item from the menu purchased by each customer?
+
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+
+#### Summary: 
+
+### What is the most purchased item on the menu and how many times was it purchased by all customers?
+
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+
+#### Summary: 
+
+###  Which item was the most popular for each customer?
+
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+
+#### Summary: 
+
 
