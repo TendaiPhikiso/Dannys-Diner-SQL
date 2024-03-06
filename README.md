@@ -162,4 +162,66 @@ ORDER BY
 
 #### Summary: 
 
+### 6. Which item was purchased first by the customer after they became a member?
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+#### Summary: 
+
+### 7. Which item was purchased just before the customer became a member? 
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+#### Summary: 
+
+### 8. What is the total items and amount spent for each member before they became a member?
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+#### Summary: 
+
+###  9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+#### Summary: 
+
+### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+#### Summary: 
+
+###  Bonus Question
+**SQL Query:**
+
+```sql
+
+```
+#### Result Set:
+
+#### Summary: 
+
 
