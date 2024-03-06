@@ -73,12 +73,35 @@ GROUP BY
 **SQL Query:**
 
 ```sql
+SELECT
+	s.customer_id AS [Customers],
+	m.product_name AS [itemName],
+	FORMAT(MIN(s.order_date), 'D', 'en-gb') AS [orderDate]
+FROM
+	sales as s INNER JOIN
+	(
+		SELECT customer_id, MIN(order_date) AS [firstItem_order]
+		FROM sales
+		GROUP BY customer_id
+	) AS [firstOrder_date] ON s.customer_id=firstOrder_date.customer_id AND s.order_date =firstOrder_date.firstItem_order
+	LEFT JOIN menu AS m ON s.product_id=m.product_id
+GROUP BY 
+	s.customer_id,
+	m.product_name
+ORDER BY
+	s.customer_id
 
 ```
 #### Result Set:
 
+| Customers | itemName | orderDate         |
+|-----------|----------|-------------------|
+| A         | curry    | 01 January 2021   |
+| A         | sushi    | 01 January 2021   |
+| B         | curry    | 01 January 2021   |
+| C         | ramen    | 01 January 2021   |
 
-#### Summary: 
+#### Summary: Customer A bought 2 items.....
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
