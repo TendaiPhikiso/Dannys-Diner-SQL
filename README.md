@@ -314,9 +314,32 @@ ORDER BY
 **SQL Query:**
 
 ```sql
-
+SELECT
+	Members,
+	SUM(points) AS [memberPointsTotal]
+FROM 
+(
+	SELECT 
+		s.customer_id AS [Members],
+		m.product_name,
+		m.price,
+		order_date,
+		(10 * m.price)* 2 AS [points]
+	FROM
+		sales AS s 
+		INNER JOIN menu as m ON s.product_id=m.product_id
+		INNER JOIN members AS mem ON s.customer_id=mem.customer_id
+	WHERE
+		s.order_date >= join_date AND MONTH(order_date) != 2
+) AS [memeberPoints]
+GROUP BY
+	Members
 ```
 #### Result Set:
+| Members | memberPointsTotal |
+|---------|-------------------|
+| A       | 1020              |
+| B       | 440               |
 
 #### Summary: 
 
