@@ -171,9 +171,41 @@ WHERE
 **SQL Query:**
 
 ```sql
+SELECT
+	Members,
+	dateJoined,
+	orderDate,
+	firstItemOrdered
+FROM
+(
+	SELECT 
+		s.customer_id AS [Members],
+		m.product_name AS [firstItemOrdered],
+		FORMAT(s.order_date, 'D', 'en-gb') AS [orderDate],
+		ROW_NUMBER() OVER(PARTITION BY s.customer_id ORDER BY COUNT(order_date) ASC) AS [date_rank],
+		FORMAT(mem.join_date, 'D', 'en-gb') AS [dateJoined]
+		FROM 
+			sales AS s  
+			INNER JOIN members AS mem ON mem.customer_id=s.customer_id
+			INNER JOIN menu AS m ON s.product_id=m.product_id
+		WHERE 
+			s.order_date > mem.join_date
+		GROUP BY
+			s.customer_id,
+			mem.join_date,
+			s.order_date,
+			m.product_name
+) AS [RankedItems]
+-- Filtering the results to include only the rows where the date_rank is 1 
+WHERE 
+	date_rank = 1; 
 
 ```
 #### Result Set:
+| Members | dateJoined       | orderDate         | firstItemOrdered |
+|---------|------------------|-------------------|------------------|
+| A       | 07 January 2021  | 10 January 2021  | ramen            |
+| B       | 09 January 2021  | 11 January 2021  | sushi            |
 
 #### Summary: 
 
