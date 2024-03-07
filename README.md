@@ -198,6 +198,8 @@ SELECT
 FROM
 	sales AS s LEFT JOIN menu as m ON s.product_id=m.product_id
 	LEFT JOIN members as mem ON s.customer_id=mem.customer_id
+
+-- Filtering the records based on the condition that the order date is before the member's join date
 WHERE
 	s.order_date < mem.join_date
 GROUP BY
