@@ -278,9 +278,34 @@ GROUP BY
 **SQL Query:**
 
 ```sql
+SELECT 
+	Customers,
+	SUM(customerPoints) AS totalPoints -- sum customer points
+FROM 
+	(
+		SELECT 
+			s.customer_id AS [Customers],
+			m.product_name,
+			m.price,
+			CASE
+				WHEN  product_name LIKE 'sushi%' THEN (10 * m.price) * 2
+				ELSE (10 * m.price)
+			END AS [customerPoints]
+		FROM
+			sales AS s INNER JOIN menu as m ON s.product_id=m.product_id
 
+	) AS [customerPoint]
+GROUP BY
+	Customers
+ORDER BY 
+	totalPoints DESC
 ```
 #### Result Set:
+| Customers | totalPoints |
+|-----------|-------------|
+| B         | 940         |
+| A         | 860         |
+| C         | 360         |
 
 #### Summary: 
 
