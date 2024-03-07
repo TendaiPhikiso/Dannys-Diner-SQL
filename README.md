@@ -186,9 +186,23 @@ ORDER BY
 **SQL Query:**
 
 ```sql
-
+SELECT
+	s.customer_id AS [Members],
+	COUNT(product_name) AS [totalItems],
+	FORMAT(SUM(m.price),'$#,0.00') AS [Amount Spent]
+FROM
+	sales AS s LEFT JOIN menu as m ON s.product_id=m.product_id
+	LEFT JOIN members as mem ON s.customer_id=mem.customer_id
+WHERE
+	s.order_date < mem.join_date
+GROUP BY
+	s.customer_id
 ```
 #### Result Set:
+| Members | totalItems | Amount Spent |
+|---------|------------|--------------|
+| A       | 2          | $25.00       |
+| B       | 3          | $40.00       |
 
 #### Summary: 
 
