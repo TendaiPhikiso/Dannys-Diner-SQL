@@ -213,9 +213,37 @@ WHERE
 **SQL Query:**
 
 ```sql
+SELECT
+	Members,
+	orderDate,
+	itemOrdered
+FROM
+(
 
+	SELECT 
+		s.customer_id AS [Members],
+		m.product_name AS [itemOrdered],
+		FORMAT(s.order_date, 'D', 'en-gb') AS [orderDate],
+		ROW_NUMBER() OVER(PARTITION BY s.customer_id ORDER BY s.order_date DESC, m.product_name DESC) AS [date_rank]
+		FROM 
+			sales AS s  
+			INNER JOIN members AS mem ON mem.customer_id=s.customer_id
+			INNER JOIN menu AS m ON s.product_id=m.product_id
+		WHERE 
+			s.order_date < mem.join_date
+		GROUP BY
+			s.customer_id,
+			s.order_date,
+			m.product_name
+) AS [RankedItems]
+WHERE 
+	date_rank = 1
 ```
 #### Result Set:
+| Members | orderDate         | itemOrdered |
+|---------|-------------------|-------------|
+| A       | 01 January 2021   | sushi       |
+| B       | 04 January 2021   | sushi       |
 
 #### Summary: 
 
