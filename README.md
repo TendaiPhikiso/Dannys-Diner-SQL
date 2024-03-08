@@ -43,7 +43,6 @@ GROUP BY
 | B         | $74.00       |
 | C         | $36.00       |
 
-#### Summary: 
 
 ### 2. How many days has each customer visited the restaurant?
 
@@ -66,7 +65,9 @@ GROUP BY
 | B         | 6            |
 | C         | 3            |
 
-#### Summary: 
+#### Customer Analysis: 
+
+<img align="center" src="https://img.freepik.com/free-vector/people-dining-asian-restaurant-men-women-eating-noodles-drink-tea_107791-4542.jpg?t=st=1709864014~exp=1709867614~hmac=2d2073a55f0a2532815fcd38a5f1cc0f4a656eace860f51a0249e66dd3afe7a5&w=1380"></a>
 
 ### 3. What was the first item from the menu purchased by each customer?
 
@@ -127,8 +128,6 @@ ORDER BY
 | sushi       | 3                   |
 
 
-#### Summary: 
-
 ###  5. Which item was the most popular for each customer?
 
 **SQL Query:**
@@ -165,7 +164,9 @@ WHERE
 | B         | sushi       | 2                 |
 | C         | ramen       | 3                 |
 
-#### Summary: 
+#### Food Analysis: 
+
+<img align="center" src="https://img.freepik.com/free-vector/traditional-japanese-food-cuisine-flat-composition-with-horizontal-view_1284-62716.jpg?t=st=1709863267~exp=1709866867~hmac=83c477ad7765cff14ab96ac5a78e257b9aa36c681fa36ccd684b35efceedffa4&w=1380"></a>
 
 ### 6. Which item was purchased first by the customer after they became a member?
 **SQL Query:**
@@ -207,8 +208,6 @@ WHERE
 | A       | 07 January 2021  | 10 January 2021  | ramen            |
 | B       | 09 January 2021  | 11 January 2021  | sushi            |
 
-#### Summary: 
-
 ### 7. Which item was purchased just before the customer became a member? 
 **SQL Query:**
 
@@ -245,8 +244,6 @@ WHERE
 | A       | 01 January 2021   | sushi       |
 | B       | 04 January 2021   | sushi       |
 
-#### Summary: 
-
 ### 8. What is the total items and amount spent for each member before they became a member?
 **SQL Query:**
 
@@ -270,8 +267,6 @@ GROUP BY
 |---------|------------|--------------|
 | A       | 2          | $25.00       |
 | B       | 3          | $40.00       |
-
-#### Summary: 
 
 ###  9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
@@ -307,8 +302,6 @@ ORDER BY
 | A         | 860         |
 | C         | 360         |
 
-#### Summary: 
-
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
 **SQL Query:**
@@ -341,7 +334,12 @@ GROUP BY
 | A       | 1020              |
 | B       | 440               |
 
-#### Summary: 
+### Membership Program Analysis
+
+
+<p align="center">
+<img align="center" src="https://img.freepik.com/free-vector/sushi-restaurant-banner_83728-1156.jpg?t=st=1709866074~exp=1709869674~hmac=e5176696a4fff439693efce36b83c7f957d28fcbda750e47972bdec46b8feebe&w=740">
+</p>
 
 ###  Bonus | creating basic data tables that Danny and his team can use to quickly derive insights
 **SQL Query:**
