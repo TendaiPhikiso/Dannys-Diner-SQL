@@ -66,6 +66,11 @@ GROUP BY
 | C         | 3            |
 
 #### Customer Analysis: 
+This information provides an overview of the spending patterns of the restaurants  customers. We can easily identify our high value customers which in this case are Customer A & B who spent the most. 
+Where’s customer C spent less & had the least amount of visits to the restaurant.
+
+To enhance customer retention and increase visits, I propose offering discounts or special perks for frequent customers. Additionally, targeted marketing through personalised email campaigns can highlight exclusive promotions, 
+creating a sense of value for the customer. Combining these strategies will not only cultivate customer loyalty but also contribute to the long-term success of the restaurant. 
 
 <img align="center" src="https://img.freepik.com/free-vector/people-dining-asian-restaurant-men-women-eating-noodles-drink-tea_107791-4542.jpg?t=st=1709864014~exp=1709867614~hmac=2d2073a55f0a2532815fcd38a5f1cc0f4a656eace860f51a0249e66dd3afe7a5&w=1380"></a>
 
