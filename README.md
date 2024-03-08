@@ -343,14 +343,47 @@ GROUP BY
 
 #### Summary: 
 
-###  Bonus Question
+###  Bonus | creating basic data tables that Danny and his team can use to quickly derive insights
 **SQL Query:**
 
 ```sql
+SELECT
+	s.customer_id,
+	s.order_date,
+	m.product_name,
+	m.price,
+	CASE
+		WHEN order_date >= join_date THEN 'Y'
+		ELSE 'N'
+	END AS [member]
+
+FROM 
+	sales AS s 
+	LEFT JOIN menu AS m ON s.product_id=m.product_id
+	LEFT JOIN members AS mem ON s.customer_id=mem.customer_id
+ORDER BY
+	s.customer_id,
+	s.order_date
 
 ```
 #### Result Set:
+| customer_id | order_date | product_name | price | member |
+|-------------|------------|--------------|-------|--------|
+| A           | 2021-01-01 | sushi         | 10    | N      |
+| A           | 2021-01-01 | curry         | 15    | N      |
+| A           | 2021-01-07 | curry         | 15    | Y      |
+| A           | 2021-01-10 | ramen         | 12    | Y      |
+| A           | 2021-01-11 | ramen         | 12    | Y      |
+| A           | 2021-01-11 | ramen         | 12    | Y      |
+| B           | 2021-01-01 | curry         | 15    | N      |
+| B           | 2021-01-02 | curry         | 15    | N      |
+| B           | 2021-01-04 | sushi         | 10    | N      |
+| B           | 2021-01-11 | sushi         | 10    | Y      |
+| B           | 2021-01-16 | ramen         | 12    | Y      |
+| B           | 2021-02-01 | ramen         | 12    | Y      |
+| C           | 2021-01-01 | ramen         | 12    | N      |
+| C           | 2021-01-01 | ramen         | 12    | N      |
+| C           | 2021-01-07 | ramen         | 12    | N      |
 
-#### Summary: 
 
 
