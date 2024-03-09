@@ -66,11 +66,10 @@ GROUP BY
 | C         | 3            |
 
 #### Customer Analysis: 
-This information provides an overview of the spending patterns of the restaurants  customers. We can easily identify our high value customers which in this case are Customer A & B who spent the most. 
+This information provides an overview of the spending patterns of the restaurants customers. We can easily identify our high value customers which in this case are Customer A & B who spent the most. 
 Where’s customer C spent less & had the least amount of visits to the restaurant.
 
-To enhance customer retention and increase visits, I propose offering discounts or special perks for frequent customers. Additionally, targeted marketing through personalised email campaigns can highlight exclusive promotions, 
-creating a sense of value for the customer. Combining these strategies will not only cultivate customer loyalty but also contribute to the long-term success of the restaurant. 
+To enhance customer retention and increase visits, I propose offering discounts or special perks for frequent customers. Additionally, targeted marketing through personalised email campaigns can highlight exclusive promotions, creating a sense of value for the customer. Combining these strategies will not only cultivate customer loyalty but also contribute to the long-term success of the restaurant. 
 
 <img align="center" src="https://img.freepik.com/free-vector/people-dining-asian-restaurant-men-women-eating-noodles-drink-tea_107791-4542.jpg?t=st=1709864014~exp=1709867614~hmac=2d2073a55f0a2532815fcd38a5f1cc0f4a656eace860f51a0249e66dd3afe7a5&w=1380"></a>
 
@@ -107,7 +106,6 @@ ORDER BY
 | B         | curry    | 01 January 2021   |
 | C         | ramen    | 01 January 2021   |
 
-#### Summary: Customer A bought 2 items.....
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
@@ -170,7 +168,9 @@ WHERE
 | C         | ramen       | 3                 |
 
 #### Food Analysis: 
+The information above provides valuable insights into customer preferences and purchasing patterns at the restaurant.  After analyzing the popularity of different menu items, it is evident that Ramen is the most in-demand dish, accounting for eight purchases. Given the widespread popularity of Ramen, it is essential to strategically enhance the menu.
 
+To diversify the menu effectively, promoting Curry options through enticing specials and creative variations is recommended. For example, introducing a "Curry Fusion Week" could showcase unique combinations of flavors and ingredients, such as a Coconut Lemongrass Curry with a special blend of spices or a Mango Tango Curry with a tropical twist. Similarly, for Sushi, implementing a "Sushi Adventure Night" with a tasting menu that includes unconventional sushi rolls like a Spicy Tuna Mango Tango Roll or a Tempura Avocado Bliss Roll can add excitement to the menu. Offering limited-time specials with innovative ingredients and flavor profiles encourages customers to explore new tastes.
 <img align="center" src="https://img.freepik.com/free-vector/traditional-japanese-food-cuisine-flat-composition-with-horizontal-view_1284-62716.jpg?t=st=1709863267~exp=1709866867~hmac=83c477ad7765cff14ab96ac5a78e257b9aa36c681fa36ccd684b35efceedffa4&w=1380"></a>
 
 ### 6. Which item was purchased first by the customer after they became a member?
