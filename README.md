@@ -217,7 +217,7 @@ WITH CTE_customerItem AS (
 		s.customer_id AS [Members],
 		m.product_name AS [itemOrdered],
 		FORMAT(s.order_date, 'D', 'en-gb') AS [orderDate],
-		ROW_NUMBER() OVER(PARTITION BY s.customer_id ORDER BY s.order_date DESC, m.product_name DESC) AS [date_rank]
+		RANK() OVER(PARTITION BY s.customer_id ORDER BY s.order_date DESC) AS [date_rank]
 		FROM 
 			sales AS s  
 			LEFT JOIN members AS mem ON mem.customer_id=s.customer_id
@@ -235,10 +235,11 @@ WHERE
 	date_rank = 1
 ```
 #### Result Set:
-| Members | orderDate         | itemOrdered |
-|---------|-------------------|-------------|
-| A       | 01 January 2021   | sushi       |
-| B       | 04 January 2021   | sushi       |
+| Members | Order Date       | Item Ordered |
+|---------|------------------|--------------|
+| A       | 01 January 2021  | Curry        |
+| A       | 01 January 2021  | Sushi        |
+| B       | 04 January 2021  | Sushi        |
 
 
 ### 8. What is the total items and amount spent for each member before they became a member?
