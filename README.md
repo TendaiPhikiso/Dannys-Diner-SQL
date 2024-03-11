@@ -212,14 +212,8 @@ WHERE
 **SQL Query:**
 
 ```sql
-SELECT
-	Members,
-	orderDate,
-	itemOrdered
-FROM
-(
-
-	SELECT 
+WITH CTE_customerItem AS (
+		SELECT 
 		s.customer_id AS [Members],
 		m.product_name AS [itemOrdered],
 		FORMAT(s.order_date, 'D', 'en-gb') AS [orderDate],
@@ -234,7 +228,9 @@ FROM
 			s.customer_id,
 			s.order_date,
 			m.product_name
-) AS [RankedItems]
+)
+SELECT Members, orderDate, itemOrdered
+FROM CTE_customerItem
 WHERE 
 	date_rank = 1
 ```
