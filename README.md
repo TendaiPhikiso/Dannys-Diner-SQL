@@ -136,26 +136,21 @@ ORDER BY
 **SQL Query:**
 
 ```sql
-SELECT
-	DISTINCT Customers,
-	productName,
-	numberOfPurchases
-FROM
-(
+WITH CTE_PopItems AS (
 	SELECT
-		customer_id AS [Customers],
-		product_name AS [productName],
+		s.customer_id AS [Customers],
+		m.product_name AS [productName],
 		COUNT(product_name) AS [numberOfPurchases],
 		--Assigning a row number to each item for each customer based on the purchase count
 		ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY COUNT(product_name) DESC) AS [item_rank]
 	FROM
 		sales as s INNER JOIN menu AS m ON s.product_id=m.product_id
 	GROUP BY
-		customer_id,
-		product_name
-) AS [RankedItems]
-
--- Filtering the results to include only the rows where the item_rank is 1 (most popular item)	
+		s.customer_id,
+		m.product_name
+) 
+SELECT Customers,productName,numberOfPurchases
+FROM CTE_PopItems
 WHERE 
 	item_rank = 1; 
 
@@ -173,27 +168,22 @@ The information above provides valuable insights into customer preferences and p
 To diversify the menu effectively, promoting Curry options through enticing specials and creative variations is recommended. For example, introducing a "Curry Fusion Week" could showcase unique combinations of flavors and ingredients, such as a Coconut Lemongrass Curry with a special blend of spices or a Mango Tango Curry with a tropical twist. Similarly, for Sushi, implementing a "Sushi Adventure Night" with a tasting menu that includes unconventional sushi rolls like a Spicy Tuna Mango Tango Roll or a Tempura Avocado Bliss Roll can add excitement to the menu. Offering limited-time specials with innovative ingredients and flavor profiles encourages customers to explore new tastes.
 <img align="center" src="https://img.freepik.com/free-vector/traditional-japanese-food-cuisine-flat-composition-with-horizontal-view_1284-62716.jpg?t=st=1709863267~exp=1709866867~hmac=83c477ad7765cff14ab96ac5a78e257b9aa36c681fa36ccd684b35efceedffa4&w=1380"></a>
 
+
 ### 6. Which item was purchased first by the customer after they became a member?
 **SQL Query:**
 
 ```sql
-SELECT
-	Members,
-	dateJoined,
-	orderDate,
-	firstItemOrdered
-FROM
-(
+WITH CTE_membersFirstPurchase AS (
 	SELECT 
 		s.customer_id AS [Members],
 		m.product_name AS [firstItemOrdered],
 		FORMAT(s.order_date, 'D', 'en-gb') AS [orderDate],
-		ROW_NUMBER() OVER(PARTITION BY s.customer_id ORDER BY COUNT(order_date) ASC) AS [date_rank],
+		ROW_NUMBER() OVER(PARTITION BY s.customer_id ORDER BY MIN(order_date) ASC) AS [date_rank],
 		FORMAT(mem.join_date, 'D', 'en-gb') AS [dateJoined]
 		FROM 
 			sales AS s  
-			INNER JOIN members AS mem ON mem.customer_id=s.customer_id
-			INNER JOIN menu AS m ON s.product_id=m.product_id
+			LEFT JOIN members AS mem ON mem.customer_id=s.customer_id
+			LEFT JOIN menu AS m ON s.product_id=m.product_id
 		WHERE 
 			s.order_date > mem.join_date
 		GROUP BY
@@ -201,8 +191,13 @@ FROM
 			mem.join_date,
 			s.order_date,
 			m.product_name
-) AS [RankedItems]
--- Filtering the results to include only the rows where the date_rank is 1 
+)
+SELECT
+	Members,
+	dateJoined,
+	orderDate,
+	firstItemOrdered
+FROM CTE_membersFirstPurchase
 WHERE 
 	date_rank = 1; 
 
@@ -231,8 +226,8 @@ FROM
 		ROW_NUMBER() OVER(PARTITION BY s.customer_id ORDER BY s.order_date DESC, m.product_name DESC) AS [date_rank]
 		FROM 
 			sales AS s  
-			INNER JOIN members AS mem ON mem.customer_id=s.customer_id
-			INNER JOIN menu AS m ON s.product_id=m.product_id
+			LEFT JOIN members AS mem ON mem.customer_id=s.customer_id
+			LEFT JOIN menu AS m ON s.product_id=m.product_id
 		WHERE 
 			s.order_date < mem.join_date
 		GROUP BY
@@ -248,6 +243,7 @@ WHERE
 |---------|-------------------|-------------|
 | A       | 01 January 2021   | sushi       |
 | B       | 04 January 2021   | sushi       |
+
 
 ### 8. What is the total items and amount spent for each member before they became a member?
 **SQL Query:**
@@ -292,7 +288,7 @@ FROM
 				ELSE (10 * m.price)
 			END AS [customerPoints]
 		FROM
-			sales AS s INNER JOIN menu as m ON s.product_id=m.product_id
+			sales AS s LEFT JOIN menu as m ON s.product_id=m.product_id
 
 	) AS [customerPoint]
 GROUP BY
@@ -321,14 +317,14 @@ FROM
 		s.customer_id AS [Members],
 		m.product_name,
 		m.price,
-		order_date,
+		s.order_date,
 		(10 * m.price)* 2 AS [points]
 	FROM
 		sales AS s 
-		INNER JOIN menu as m ON s.product_id=m.product_id
-		INNER JOIN members AS mem ON s.customer_id=mem.customer_id
+		LEFT JOIN menu as m ON s.product_id=m.product_id
+		LEFT JOIN members AS mem ON s.customer_id=mem.customer_id
 	WHERE
-		s.order_date >= join_date AND MONTH(order_date) != 2
+		s.order_date >= mem.join_date AND MONTH(order_date) != 2
 ) AS [memeberPoints]
 GROUP BY
 	Members
@@ -340,7 +336,15 @@ GROUP BY
 | B       | 440               |
 
 ### Membership Program Analysis
+The data extracted from Danny's Diner members provides valuable insights into their purchasing behavior and loyalty. Currently, there are 2 members: A & B each with different total items purchased, amounts spent, and accumulated points.
 
+To optimize and expand the existing customer loyalty program, Danny could consider the following strategies:
+
+**Referral Program:** Implement a referral program where existing members can earn additional points or exclusive benefits for bringing in new customers. This not only promotes customer loyalty but also expands the customer base.
+
+**Birthday Rewards:** Recognize and celebrate customers' birthdays by offering them special rewards or discounts during their birth month. This gesture adds a personal touch to the loyalty program.
+
+**Feedback Mechanism:** Establish a feedback mechanism to understand members' preferences and gather suggestions for improvement. This will enable Danny to continuously refine the loyalty program based on customer input.
 
 <p align="center">
 <img align="center" src="https://img.freepik.com/free-vector/sushi-restaurant-banner_83728-1156.jpg?t=st=1709866074~exp=1709869674~hmac=e5176696a4fff439693efce36b83c7f957d28fcbda750e47972bdec46b8feebe&w=740">
@@ -389,5 +393,6 @@ ORDER BY
 | C           | 2021-01-01 | ramen        | 12    | N      |
 | C           | 2021-01-07 | ramen        | 12    | N      |
 
-
+## Accreditation
+8 week SQL Challenge by :  [Danny Ma](https://8weeksqlchallenge.com/)
 
